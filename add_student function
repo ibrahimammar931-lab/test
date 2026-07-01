@@ -1,0 +1,1 @@
+Added checks to prevent adding a student with the same name as an existing student and to validate input for student grades
