@@ -1,1 +1,1 @@
-Improved the average function to handle empty lists.
+Improved the add_student function to validate input and prevent duplicate student names.
