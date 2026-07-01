@@ -1,1 +1,1 @@
-Added input validation for the number of grades and each grade.
+Added a check to prevent duplicate student names.
