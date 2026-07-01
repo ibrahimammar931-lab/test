@@ -1,1 +1,1 @@
-Added a check to handle cases where a student has no grades.
+Improved the average function to handle empty lists.
