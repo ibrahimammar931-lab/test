@@ -1,0 +1,1 @@
+Added a check to return 0 if the list of grades is empty
