@@ -1,1 +1,0 @@
-Improved the add_student function to validate input and prevent duplicate student names.
