@@ -1,1 +1,1 @@
-Added a check to prevent duplicate student names.
+Added a check to handle cases where a student has no grades.
