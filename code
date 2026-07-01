@@ -1,15 +1,13 @@
-students = {
-    "Alice": [15, 18, 14],
-    "Bob": [10, 12, 11],
-    "Charlie": [19, 17, 18]
-}
+```
+# Define a dictionary to store student data
+students = {}
 
-
+# Function to calculate the average of a list of grades
 def average(grades):
     return sum(grades) / len(grades)
 
-
-def display_results():
+# Function to display student results
+def display_results(students):
     print("Student Results")
     print("-" * 30)
 
@@ -25,5 +23,53 @@ def display_results():
 
         print(f"{name}: Average = {avg:.2f} | {status}")
 
+# Function to get student data from user input
+def get_student_data():
+    students = {}
+    num_students = input("Enter the number of students: ")
 
-display_results()
+    # Validate input for number of students
+    while not num_students.isdigit() or int(num_students) <= 0:
+        print("Invalid input. Please enter a positive integer.")
+        num_students = input("Enter the number of students: ")
+
+    num_students = int(num_students)
+
+    for i in range(num_students):
+        name = input("Enter student's name: ")
+
+        # Validate input for student's name
+        while not name.strip():
+            print("Invalid input. Please enter a non-empty string.")
+            name = input("Enter student's name: ")
+
+        grades = []
+        num_grades = input("Enter the number of grades for {}: ".format(name))
+
+        # Validate input for number of grades
+        while not num_grades.isdigit() or int(num_grades) <= 0:
+            print("Invalid input. Please enter a positive integer.")
+            num_grades = input("Enter the number of grades for {}: ".format(name))
+
+        num_grades = int(num_grades)
+
+        for j in range(num_grades):
+            grade = input("Enter grade {}: ".format(j+1))
+
+            # Validate input for grade
+            while not grade.replace('.', '', 1).isdigit() or float(grade) < 0:
+                print("Invalid input. Please enter a non-negative number.")
+                grade = input("Enter grade {}: ".format(j+1))
+
+            grades.append(float(grade))
+
+        students[name] = grades
+
+    return students
+
+# Get student data from user input
+students = get_student_data()
+
+# Display student results
+display_results(students)
+```
