@@ -4,26 +4,27 @@ students = {
     "Charlie": [19, 17, 18]
 }
 
-
 def average(grades):
     return sum(grades) / len(grades)
 
-
-def display_results():
+def display_results(students_sorted):
     print("Student Results")
     print("-" * 30)
-
-    for name, grades in students.items():
+    passed_count = 0
+    for name, grades in students_sorted:
         avg = average(grades)
-
         if avg >= 16:
             status = "Excellent"
         elif avg >= 10:
             status = "Passed"
+            passed_count += 1
         else:
             status = "Failed"
-
         print(f"{name}: Average = {avg:.2f} | {status}")
+    print(f"Number of students who passed: {passed_count}")
 
+def sort_and_count(students):
+    students_sorted = sorted(students.items(), key=lambda x: average(x[1]), reverse=True)
+    display_results(students_sorted)
 
-display_results()
+sort_and_count(students)
