@@ -1,10 +1,13 @@
-```
+
 # Define a dictionary to store student data
 students = {}
 
 # Function to calculate the average of a list of grades
 def average(grades):
+    if not grades:
+        return 0
     return sum(grades) / len(grades)
+
 
 # Function to display student results
 def display_results(students):
@@ -73,3 +76,4 @@ students = get_student_data()
 # Display student results
 display_results(students)
 ```
+
