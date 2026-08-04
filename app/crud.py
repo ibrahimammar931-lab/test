@@ -27,8 +27,8 @@ def create_book(db: Session, book: schemas.BookCreate) -> models.Book:
     return db_book
 
 
-def get_books(db: Session) -> list[models.Book]:
-    return db.query(models.Book).all()
+def get_books(db: Session, skip: int = 0, limit: int = 20) -> list[models.Book]:
+    return db.query(models.Book).offset(skip).limit(limit).all()
 
 
 def get_book(db: Session, book_id: int) -> models.Book | None:
