@@ -21,8 +21,8 @@ def create(book: schemas.BookCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=list[schemas.BookOut])
-def list_books(db: Session = Depends(get_db)):
-    return crud.get_books(db)
+def list_books(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
+    return crud.get_books(db, skip=skip, limit=limit)
 
 
 @router.get("/{book_id}", response_model=schemas.BookOut)
