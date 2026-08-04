@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from .. import crud, schemas
 from ..database import SessionLocal
+from ..security import require_api_key
 
 router = APIRouter(prefix="/books", tags=["Books"])
 
@@ -15,7 +16,7 @@ def get_db():
         db.close()
 
 
-@router.post("/", response_model=schemas.BookOut)
+@router.post("/", response_model=schemas.BookOut, dependencies=[Depends(require_api_key)])
 def create(book: schemas.BookCreate, db: Session = Depends(get_db)):
     return crud.create_book(db, book)
 
@@ -33,7 +34,7 @@ def get_book(book_id: int, db: Session = Depends(get_db)):
     return book
 
 
-@router.put("/{book_id}", response_model=schemas.BookOut)
+@router.put("/{book_id}", response_model=schemas.BookOut, dependencies=[Depends(require_api_key)])
 def update(book_id: int, book: schemas.BookUpdate, db: Session = Depends(get_db)):
     updated = crud.update_book(db, book_id, book)
     if not updated:
@@ -41,7 +42,7 @@ def update(book_id: int, book: schemas.BookUpdate, db: Session = Depends(get_db)
     return updated
 
 
-@router.delete("/{book_id}")
+@router.delete("/{book_id}", dependencies=[Depends(require_api_key)])
 def delete(book_id: int, db: Session = Depends(get_db)):
     deleted = crud.delete_book(db, book_id)
     if not deleted:
