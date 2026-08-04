@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from .database import Base
 
@@ -24,3 +25,15 @@ class Book(Base):
 
     author_id = Column(Integer, ForeignKey("authors.id"))
     author = relationship("Author", back_populates="books")
+
+
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id = Column(Integer, primary_key=True)
+    method = Column(String, nullable=False)
+    path = Column(String, nullable=False)
+    resource_type = Column(String, nullable=True)
+    resource_id = Column(Integer, nullable=True)
+    actor = Column(String, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
