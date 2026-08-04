@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -32,6 +34,19 @@ class BookOut(BaseModel):
     price: float
     stock: int
     author_id: int
+
+    class Config:
+        from_attributes = True
+
+
+class AuditLogOut(BaseModel):
+    id: int
+    method: str
+    path: str
+    resource_type: str | None
+    resource_id: int | None
+    actor: str | None
+    created_at: datetime
 
     class Config:
         from_attributes = True
