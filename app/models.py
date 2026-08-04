@@ -24,3 +24,14 @@ class Book(Base):
 
     author_id = Column(Integer, ForeignKey("authors.id"))
     author = relationship("Author", back_populates="books")
+
+
+class Review(Base):
+    __tablename__ = "reviews"
+
+    id = Column(Integer, primary_key=True)
+    book_id = Column(Integer, ForeignKey("books.id"), nullable=False)
+    rating = Column(Integer, nullable=False)
+    comment = Column(String, nullable=False)
+
+    book = relationship("Book")
