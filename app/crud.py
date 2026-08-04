@@ -53,3 +53,15 @@ def delete_book(db: Session, book_id: int) -> bool:
     db.delete(db_book)
     db.commit()
     return True
+
+
+def create_review(db: Session, book_id: int, review: schemas.ReviewCreate) -> models.Review:
+    db_review = models.Review(book_id=book_id, **review.model_dump())
+    db.add(db_review)
+    db.commit()
+    db.refresh(db_review)
+    return db_review
+
+
+def get_reviews_for_book(db: Session, book_id: int) -> list[models.Review]:
+    return db.query(models.Review).filter(models.Review.book_id == book_id).all()

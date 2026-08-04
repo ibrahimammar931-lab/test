@@ -16,3 +16,11 @@ Simple FastAPI application for managing authors and books.
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
+
+## API Key
+
+Write endpoints (POST, PUT, DELETE) require an API key sent in the `X-API-Key` header.
+
+- Set the expected key via the `BOOKSTORE_API_KEY` environment variable (e.g., `export BOOKSTORE_API_KEY=your-secret-key`).
+- If the variable is not set, the default key is `change-me` (for development only).
+- Requests missing the header or with an incorrect key will receive a `401 Unauthorized` response.

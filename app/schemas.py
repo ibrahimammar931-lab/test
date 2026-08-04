@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class AuthorCreate(BaseModel):
@@ -32,6 +32,21 @@ class BookOut(BaseModel):
     price: float
     stock: int
     author_id: int
+
+    class Config:
+        from_attributes = True
+
+
+class ReviewCreate(BaseModel):
+    rating: int = Field(..., ge=1, le=5)
+    comment: str
+
+
+class ReviewOut(BaseModel):
+    id: int
+    book_id: int
+    rating: int
+    comment: str
 
     class Config:
         from_attributes = True

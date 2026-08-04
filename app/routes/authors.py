@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from .. import crud, schemas
 from ..database import SessionLocal
+from ..security import require_api_key
 
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
@@ -15,7 +16,7 @@ def get_db():
         db.close()
 
 
-@router.post("/", response_model=schemas.AuthorOut)
+@router.post("/", response_model=schemas.AuthorOut, dependencies=[Depends(require_api_key)])
 def create(author: schemas.AuthorCreate, db: Session = Depends(get_db)):
     return crud.create_author(db, author)
 
